@@ -1,20 +1,18 @@
-const routes=(app)=>{
-    app.route('/contact')
-    .get((req,res)=>{
-        res.send(`GET request is successful!`);
-    })
-    .post((req,res)=>{
-        res.send(`POST request is successful!`);
-    });
+import {
+  addNewContact,
+  getContacts,
+  getContactWithId,
+  updateContact,
+  deleteContact,
+} from "../controllers/Controller";
+const routes = (app) => {
+  app.route("/contact").get(getContacts).post(addNewContact);
 
-    app.route('/contact/:contactId')
-    .put((req,res)=>{
-        res.send(`PUT request is successful!`);
-    })
-    .delete((req,res)=>{
-        res.send(`DELETE request is successful!`);
-    });
-
-}
+  app
+    .route("/contact/:contactId")
+    .get(getContactWithId)
+    .put(updateContact)
+    .delete(deleteContact);
+};
 
 export default routes;
